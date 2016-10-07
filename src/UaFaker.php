@@ -15,7 +15,12 @@ class UaFaker
 
     public static function userAgent()
     {
-
+        $i = mt_rand(0, 1);
+        if ($i === 0) {
+            return self::pc();
+        } else {
+            return self::mobile();
+        }
     }
 
     public static function pc()
@@ -25,6 +30,20 @@ class UaFaker
 
     public static function mobile()
     {
+        if (mt_rand(0, 1) === 0) {
+            return self::android();
+        } else {
+            return self::iphoneOrIpad();
+        }
+    }
 
+    public static function android()
+    {
+        return Android::getUserAgent();
+    }
+
+    public static function iphoneOrIpad()
+    {
+        return Iphone::getUserAgent();
     }
 }

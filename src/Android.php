@@ -26,7 +26,7 @@ class Android
         'Nexus 10',
     ];
 
-    public static function getBuild()
+    protected static function getBuild()
     {
         $builder = 'Android ' .
             mt_rand(1, 7) . '.' . mt_rand(0, 4) . '.' . mt_rand(0, 3) . '; ' .
@@ -34,5 +34,10 @@ class Android
         return $builder;
     }
 
-    protected $ua = 'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.23 Mobile Safari/537.36';
+    public static function getUserAgent()
+    {
+        $android = self::getBuild();
+        $chrome = WebBrowser::getChrome();
+        return "Mozilla/5.0 (Linux; {$android}) {$chrome}";
+    }
 }
